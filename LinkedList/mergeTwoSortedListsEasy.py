@@ -48,13 +48,9 @@ class Solution:
     
 
 def main():
-    list1 = ListNode(1)
-    list1.next = 2
-    list1.next = 4
-    print(list1)
-    list2 = ListNode(1)
-    list2.next = 3
-    list2.next = 4
+    list1 = [ListNode(1), ListNode(2), ListNode(4)]
+    list2 = [ListNode(1), ListNode(3), ListNode(4)]
+
 
     print(Solution().mergeTwoLists(list1, list2))
 
