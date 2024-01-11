@@ -26,7 +26,10 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 
 
 class Solution:
-    def maxProfit(self, prices: list[int]) -> int:
+    def maxProfitBruteForce(self, prices: list[int]) -> int:
+        """
+        O(n^2) time complexity since looping through list twice.
+        """
         maxProfit = 0
         n = len(prices)
         for i in range(n -1):
@@ -36,8 +39,20 @@ class Solution:
         return maxProfit
 
 
+    def maxProfit(self, prices: list[int]) -> int:
+        maxProfit = 0
+        buy = prices[0]
+        for sell in prices[1:]:
+            if sell > buy:
+                if sell - buy > maxProfit:
+                    maxProfit = sell - buy
+            else:
+                buy = sell
+        return maxProfit
+
+
 def main():
-    inputPrices = [7,6,4,3,1]
+    inputPrices = [7,1,5,3,6,4]
     print(Solution().maxProfit(inputPrices))
    
 
