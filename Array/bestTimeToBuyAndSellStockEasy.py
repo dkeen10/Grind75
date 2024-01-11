@@ -40,6 +40,8 @@ class Solution:
 
 
     def maxProfit(self, prices: list[int]) -> int:
+        """
+        O(n) time complexity since only loops once."""
         maxProfit = 0
         buy = prices[0]
         for sell in prices[1:]:
