@@ -33,6 +33,7 @@ class TreeNode:
     def __repr__(self) -> str:
         return f"TreeNode({self.val}, {self.left}, {self.right})"
 
+
 class Solution:
     def invertTreeWithoutRecursion(self, root: [TreeNode]) -> [TreeNode]:
         """
@@ -58,9 +59,10 @@ class Solution:
    
 
 def main():
-    Tree1 = [TreeNode(2, 1, 3)]
-    print(Solution().invertTreeWithoutRecursion(Tree1))
-    print(Tree1)
+    # root = TreeNode(4, TreeNode(2, TreeNode(1), TreeNode(3)), TreeNode(7, TreeNode(6), TreeNode(9)))
+    root = TreeNode(2, TreeNode(1), TreeNode(3))
+    print(Solution().invertTreeWithoutRecursion(root)) 
+    print(Solution().invertTreeWithRecursion(root))
 
 
 if __name__ == "__main__":
