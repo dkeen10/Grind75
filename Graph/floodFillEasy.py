@@ -34,15 +34,26 @@ class Solution:
         
         ROWS = len(image)
         COLS = len(image[0])
-        temp = image[sr][sc]
-        visited = set()
+        COLOUR = image[sr][sc]
 
-        h = []
+        def fill(sr, sc):
+            #change color
+            image[sr][sc] = color
+            #up
+            if sr-1>=0 and image[sr-1][sc] == COLOUR:
+                fill(sr-1, sc)
+            #left
+            if sc-1>=0 and image[sr][sc-1] == COLOUR:
+                fill(sr, sc-1)
+            #down
+            if sr+1<ROWS and image[sr+1][sc] == COLOUR:
+                fill(sr+1, sc)
+            #right
+            if sc+1<COLS and image[sr][sc+1] == COLOUR:
+                fill(sr, sc+1)
 
-        heappush(h, (0, sr, sc))
-
-        while h:
-            distance
+        fill(sr, sc)
+        return image
 
 
 def main():
