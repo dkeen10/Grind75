@@ -28,20 +28,36 @@ Output: 2
 
 # Definition for a binary tree node.
 class TreeNode:
-    def __init__(self, x):
+    def __init__(self, x, left=None, right=None):
         self.val = x
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = left
 
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        """
+        we do DFS and since BST is set up such that for each Node, left descendant is less and right descendant is greater, we can check:
+            - If both p and q are greater than the value of temp, move to the right child (temp = temp.right).
+            - If both p and q are smaller than the value of temp, move to the left child (temp = temp.left).
+            - If the values of p and q are on opposite sides of temp (one is greater, and the other is smaller), temp is the lowest common ancestor. Return temp.
+        """
+
+        currentNode = root
+
+        while currentNode is not None:
+            if p.val > root.val and q.val > root.val:
+                currentNode = currentNode.right
+            elif p.val < root.val and q.val < root.val:
+                currentNode = currentNode.left
+            else:
+                return currentNode
 
 
 def main():
-    root = TreeNode()
-    p = 2
-    q = 8
+    root = [TreeNode(6, TreeNode(2, TreeNode(0), TreeNode(4, TreeNode(3), TreeNode(5))), TreeNode(8, TreeNode(7), TreeNode(9)))]
+    p = TreeNode(2)
+    q = TreeNode(8)
     print(Solution().lowestCommonAncestor(root, p, q))
 
 
