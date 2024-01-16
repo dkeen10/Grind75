@@ -46,15 +46,16 @@ class Solution:
         currentNode = root
 
         while currentNode is not None:
-            if p.val > root.val and q.val > root.val:
+            if p.val > currentNode.val and q.val > currentNode.val:
                 currentNode = currentNode.right
-            elif p.val < root.val and q.val < root.val:
+            elif p.val < currentNode.val and q.val < currentNode.val:
                 currentNode = currentNode.left
             else:
                 return currentNode
 
 
 def main():
+    # doesn't work here since lowestCommonAncestor only takes TreeNode and not [TreeNode]
     root = [TreeNode(6, TreeNode(2, TreeNode(0), TreeNode(4, TreeNode(3), TreeNode(5))), TreeNode(8, TreeNode(7), TreeNode(9)))]
     p = TreeNode(2)
     q = TreeNode(8)
