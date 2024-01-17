@@ -33,13 +33,16 @@ class TreeNode:
 
 class Solution:
     def isBalanced(self, root: [TreeNode]) -> bool:
-        heightLeft = 0
-        heightRight = 0
-
+        return (self.Height(root) >= 0)
+        
+    def Height(self, root):
         if root is None:
             return True
-        
-        
+        leftHeight = self.Height(root.left)
+        rightHeight = self.Height(root.right)
+        if leftHeight > 0 or rightHeight > 0 or abs(leftHeight - rightHeight) > 1:
+            return -1
+        return max(leftHeight, rightHeight) + 1
 
 def main():
     pass
