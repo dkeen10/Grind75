@@ -31,18 +31,66 @@ Explanation: There is no cycle in the linked list.
 
 
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
 
 class Solution:
-    def hasCycle(self, head: Optional[ListNode]) -> bool:
+    def hasCycleList(self, head: [ListNode]) -> bool:
+        address = []
+        currentNode = head
+        while (currentNode):
+            address.append(currentNode)
+            currentNode = currentNode.next
+            if (currentNode in address):
+                return True
+        return False
+    
 
+    def hasCycleTwoPointer(self, head: [ListNode]) -> bool:
+        fastpointer = head
+        slowpointer = head
+        while (fastpointer and fastpointer.next):
+            fastpointer = fastpointer.next.next
+            slowpointer = slowpointer.next
+            if (fastpointer == slowpointer):
+                return True
+        return False
+    
+
+    # similar to the list approach, just using a set instead of a list
+    def hasCycleHash(self, head: [ListNode]) -> bool:
+        visited = set()
+        currentNode = head
+        while (currentNode):
+            if (currentNode in visited):
+                return True
+            visited.add(currentNode)
+            currentNode = currentNode.next
 
 
 def main():
-    pass    
+    head = ListNode(3)
+    head.next = ListNode(2)
+    head.next.next = ListNode(0)
+    head.next.next.next = ListNode(-4)
+    head.next.next.next.next = head.next
+    pos = 1
+    print(Solution().hasCycleList(head)) # True
+
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = head
+    pos = 0
+    print(Solution().hasCycleList(head)) # True
+
+    head = ListNode(1)
+    pos = -1
+    print(Solution().hasCycleList(head)) # False
+
+    
 
 
 if __name__ == '__main__':
