@@ -39,7 +39,8 @@ class Solution:
 
 
 def main():
-    pass
+    s = "abccccdd"
+    print(Solution().longestPalindrome(s))
 
 
 if __name__ == "__main__":
