@@ -19,14 +19,14 @@ Output: "10101"
 
 
 class Solution:
-    def addBinary_cheat(self, a: str, b: str) -> str:
-       return bin(int(a, 2) + int(b, 2))
+    def addBinary(self, a: str, b: str) -> str:
+       return bin(int(a, 2) + int(b, 2))[2:] 
 
 
 def main():
     a = "11"
     b = "1"
-    print(Solution().addBinary_cheat(a, b))
+    print(Solution().addBinary(a, b))
 
     # a = "1010"
     # b = "1011"
