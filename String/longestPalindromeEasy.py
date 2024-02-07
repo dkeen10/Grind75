@@ -24,7 +24,18 @@ Explanation: The longest palindrome that can be built is "a", whose length is 1.
 
 class Solution:
     def longestPalindrome(self, s: str) -> int:
-        
+        """
+        make a set to hold leftover, non-matching characters
+        loop through the characters in the string.  if they aren't in the set yet, add to set, else remove from set (paired for palindrome)
+        longest palindrome is length of string minus length of characters still in the set of leftover characters.
+        """
+        chars = set()
+        for char in s:
+            if char in chars:
+                chars.remove(char)
+            else:
+                chars.add(char)
+        return len(s) - len(chars) + 1 if chars else len(s)
 
 
 def main():
