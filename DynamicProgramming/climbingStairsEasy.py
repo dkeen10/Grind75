@@ -31,7 +31,7 @@ class Solution:
     def climbStairsMath(self, n: int) -> int:
         solutions = 1
 
-        for i in range(1, n(//2) + 1):
+        for i in range(1, n//2 + 1):
             product = 1
 
             for j in range(i, 2 * i):
