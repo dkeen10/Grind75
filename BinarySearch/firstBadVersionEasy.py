@@ -28,7 +28,7 @@ Output: 1
 
 # The isBadVersion API is already defined for you.
 def isBadVersion(version: int) -> bool:
-    return True
+    pass
 
 
 class Solution:
@@ -37,19 +37,16 @@ class Solution:
             return 1
         
         start = 1
-        end = n - 1
+        end = n
 
         while start <= end:
+            # apparently (start + end) >> 1 gives the same result
             mid = start + (end - start)//2
-            if not isBadVersion(mid):
+            if isBadVersion(mid):
                 end = mid - 1
-            elif (isBadVersion(mid) and isBadVersion(mid - 1)):
-                start = mid + 1
             else:
-                return mid
-            
-                
-        return -1
+                start = mid + 1
+        return start
 
 
 

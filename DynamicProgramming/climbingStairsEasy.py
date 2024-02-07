@@ -66,6 +66,7 @@ class Solution:
         temp_solutions = [-1] * (n + 1)
         return self.solveBottomUp(0, n, temp_solutions)
     
+
     def solveBottomUp(self, i, n, temp_solutions):
         if i == n:
             return 1
@@ -78,6 +79,7 @@ class Solution:
         temp_solutions[i] = self.solveBottomUp(i + 1, n, temp_solutions) + self.solveBottomUp(i + 2, n, temp_solutions)
 
         return temp_solutions[i]
+
 
 def main():
     n = 3
