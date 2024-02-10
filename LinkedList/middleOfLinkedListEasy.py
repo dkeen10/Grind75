@@ -30,7 +30,21 @@ class ListNode:
 
 class Solution:
     def middleNode(self, head: [ListNode]) -> [ListNode]:
-        pass
+        length = 0
+        temp = head
+        while temp:
+            length += 1
+            temp = temp.next
+
+        middle = length // 2
+
+        temp2 = head
+        count = 0
+        while temp2:
+            if count == middle:
+                return temp.val
+            count += 1
+        return -1
 
 
 def main():
