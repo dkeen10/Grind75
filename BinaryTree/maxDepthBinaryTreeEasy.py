@@ -26,11 +26,19 @@ class TreeNode:
         self.left = left
         self.right = right
 
-        
+
 class Solution:
     def maxDepth(self, root: [TreeNode]) -> int:
-        pass
+        max_depth = self.helper(root)
+        return max_depth
 
+    def helper(self, root):
+            if root is None:
+                return 0
+            leftDepth = self.helper(root.left)
+            rightDepth = self.helper(root.right)
+
+            return 1 + max(leftDepth, rightDepth)
 
 def main():
     root = [3, 9, 20, None, None, 15, 7]
