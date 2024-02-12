@@ -39,7 +39,16 @@ class Solution:
             rightDepth = self.helper(root.right)
 
             return 1 + max(leftDepth, rightDepth)
+    
 
+    def maxDepth2(self, root: [TreeNode]) -> int:
+        def dfs(root, depth):
+            if not root: return depth
+            return max(dfs(root.left, depth + 1), dfs(root.right, depth + 1))
+                       
+        return dfs(root, 0)
+    
+    
 def main():
     root = [3, 9, 20, None, None, 15, 7]
     print(Solution().maxDepth(root))
