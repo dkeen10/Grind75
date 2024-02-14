@@ -33,19 +33,21 @@ class TreeNode:
 
 class Solution:
     def diameterOfBinaryTree(self, root: [TreeNode]) -> int:
+        def dfs(node):
+            if not node:
+                return 0
+
+            left = dfs(node.left)
+            right = dfs(node.right)
+
+            self.diameter = max(self.diameter, left + right)
+
+            return 1 + max(left, right)
+
         self.diameter = 0
-        self.dfs(root)
+        dfs(root)
         return self.diameter
-    
-    def dfs(self, node):
-        # base case:
-        if node == None:
-            return 0
-		# recursive cases
-        left_height = self.dfs(node.left)
-        right_height = self.dfs(node.right)
-        self.diameter = max(self.diameter,left_height + right_height )
-        return max(left_height,right_height) + 1
+
 
 def main():
     root = [1, 2, 3, 4, 5]

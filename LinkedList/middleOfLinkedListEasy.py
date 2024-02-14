@@ -29,23 +29,34 @@ class ListNode:
 
 
 class Solution:
-    def middleNode(self, head: [ListNode]) -> [ListNode]:
+    def middleNodeBF(self, head: [ListNode]) -> [ListNode]:
         length = 0
         temp = head
         while temp:
             length += 1
             temp = temp.next
-
+            
         middle = length // 2
 
         temp2 = head
         count = 0
         while temp2:
             if count == middle:
-                return temp.val
+                return temp2
             count += 1
+            temp2 = temp2.next
+
         return -1
 
+    def middleNode_2Pointer(self, head: [ListNode]) -> [ListNode]:
+        slow_pointer = head
+        fast_pointer = head
+
+        while slow_pointer and slow_pointer.next:
+            fast_pointer = fast_pointer.next
+            slow_pointer = slow_pointer.next.next
+        return fast_pointer
+        
 
 def main():
     head = [1, 2, 3, 4, 5]
