@@ -34,21 +34,26 @@ class Solution:
         return True
 
 
-    def containsDuplicate_setApproach_basic(self, nums: list[int]) -> bool:
+    def containsDuplicate_setApproach(self, nums: list[int]) -> bool:
         """
-        Better version of above approach since it immediately returns True when duplicate found instead of converting whole array.
+        Faster version of above approach since it immediately returns True when duplicate found instead of converting whole array.
         """
         nums_set = set()
+        for i in range(len(nums)):
+            if nums[i] in nums_set:
+                return True
+            nums_set.add(nums[i])
+        return False
 
-        if
-        return True
+     
     
     def containsDuplicate_sortedApproach(self, nums: list[int]) -> bool:
-        nums_set = set(nums)
+        sorted_nums = sorted(nums)
 
-        if len(nums_set) == len(nums):
-            return False
-        return True
+        for i in range(len(nums) - 1):
+            if sorted_nums[i] == sorted_nums[i+1]:
+                return True
+        return False
 
         
 def main():
