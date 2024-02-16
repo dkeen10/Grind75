@@ -27,74 +27,49 @@ Given a roman numeral, convert it to an integer.
 
 class Solution:
     def romanToInt_Naive(self, s: str) -> int:
-        if len(s) == 1:
-            if s[0] == "I":
-                return 1
-            if s[0] == "V":
-                return 5
-            if s[0] == "X":
-                return 10
-            if s[0] == "L":
-                return 50
-            if s[0] == "C":
-                return 100
-            if s[0] == "D":
-                return 500
-            if s[0] == "M":
-                return 1000
-        
         numerals = list(s)
-        print(numerals)
         base_10_num = 0
 
-        for i in range(len(s) - 1, 0, -1):
-            if numerals[i] == "I":
-                base_10_num += 1
-            elif numerals[i] == "V":
-                if numerals[i - 1] == "I":
-                    base_10_num -= 1
-                    i -= 2
-                base_10_num += 5
-            elif numerals[i] == "X":
-                if numerals[i - 1] == "I":
-                    base_10_num -= 1
-                    i -= 2
-                base_10_num += 10
-            elif numerals[i] == "L":
-                if numerals[i - 1] == "X":
-                    base_10_num -= 10
-                    i -= 2
-                base_10_num += 50
-            elif numerals[i] == "C":
-                if numerals[i - 1] == "X":
-                    base_10_num -= 10
-                    i -= 2
-                base_10_num += 100
-            elif numerals[i] == "D":
-                if numerals[i - 1] == "C":
-                    base_10_num -= 100
-                    i -= 2
-                base_10_num += 500
-            elif numerals[i] == "M":
-                if numerals[i - 1] == "C":
-                    base_10_num -= 100
-                    i -= 2
+        for i in range(len(s) - 1):
+            if numerals[i] == "M":
                 base_10_num += 1000
-
-        if numerals[0] == "I" and (numerals[1] != "V" and numerals[1] != "X"):
+            elif numerals[i] == "D":
+                    base_10_num += 500
+            elif numerals[i] == "C":
+                if numerals[i + 1] in ["M", "D"]:
+                    base_10_num -= 100
+                else:
+                    base_10_num += 100
+            elif numerals[i] == "L":
+                base_10_num += 50
+            elif numerals[i] == "X":
+                if numerals[i + 1] in ["C", "L"]:
+                    base_10_num -= 10
+                else:
+                    base_10_num += 10
+            elif numerals[i] == "V":
+                    base_10_num += 5
+            elif numerals[i] == "I":
+                if numerals[i + 1] in ["X", "V"]:
+                    base_10_num -= 1
+                else:
+                    base_10_num += 1
+        
+        if s[-1] == "I":
             base_10_num += 1
-        elif numerals[0] == "X" and (numerals[1] == "L" and numerals[1] == "C"):
-             base_10_num += 10
-        elif numerals[0] == "C" and (numerals[1] == "D" and numerals[1] == "M"):
-            base_10_num += 100
-        elif numerals[0] == "V":
+        if s[-1] == "V":
             base_10_num += 5
-        elif numerals[0] == "L":
+        if s[-1] == "X":
+            base_10_num += 10
+        if s[-1] == "L":
             base_10_num += 50
-        elif numerals[0] == "D":
+        if s[-1] == "C":
+            base_10_num += 100
+        if s[-1] == "D":
             base_10_num += 500
-        elif numerals[0] == "M":
+        if s[-1] == "M":
             base_10_num += 1000
+
         return base_10_num
     
 
@@ -123,6 +98,14 @@ def main():
     s = "MCMXCIV"
     print(Solution().romanToInt_Hashtable(s))
 
+    s = "III"
+    print(Solution().romanToInt_Naive(s))
+
+    s = "IV"
+    print(Solution().romanToInt_Naive(s))
+
+    s = "MCMXCIV"
+    print(Solution().romanToInt_Naive(s))
 
 if __name__ == "__main__":
     main()
