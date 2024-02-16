@@ -56,12 +56,6 @@ class Solution:
         return resulting_intervals  
         
 
-
-            
-
-        
-
-
 def main():
     intervals = [[1,3],[6,9]]
     newInterval = [2,5]
