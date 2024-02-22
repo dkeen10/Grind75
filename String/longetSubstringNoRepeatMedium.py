@@ -31,8 +31,16 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        repeated_chars = set()
+        longest_substring = 0
+        slow_pointer= 0
+        fast_pointer= 0
 
+        while slow_pointer < len(s) - 1 and len(s) - slow_pointer > longest_substring:
+            used_characters = set()
+            if s[slow_pointer]
+            used_characters.add(s[slow_pointer])
+
+            slow_pointer += 1
 
 def main():
     s = "abcabcbb"
