@@ -34,21 +34,60 @@ Explanation: The only possible triplet sums up to 0.
 
 
 class Solution:
+    # def threeSum_BF(self, nums: list[int]) -> list[list[int]]:
+    #     num_triplets = len(nums) // 3   
+    #     triplets = []
+    #     temp_triplet = []
+    #     i, j, k = 0, 1, 2
+
+    #     while sum(temp_triplet) != 0:
+    #         temp_triplet = [nums[i], nums[j], nums[k]]
+    #         if sum(temp_triplet) != 0:
+    #             k += 1
+
+    #     for i in range(len(nums)):
+
+
+    def threeSum_BF(self, nums: list[int]) -> list[list[int]]:
+        triplets = set()
+        nums.sort()
+        n = len(nums)
+
+        for i in range(n):
+            for j in range(i+1, n):
+                for k in range(j+1, n):
+                    if nums[i] + nums[j] + nums[k] == 0:
+                        triplets.add((nums[i], nums[j], nums[k]))
+
+        
+        return list(triplets)
+    
     def threeSum(self, nums: list[int]) -> list[list[int]]:
-        num_triplets = len(nums) // 3   
         triplets = []
-        temp_triplet = []
-        i, j, k = 0, 1, 2
+        nums.sort()
+        n = len(nums)
 
-        while sum(temp_triplet) != 0:
-            temp_triplet = [nums[i], nums[j], nums[k]]
-            if sum(temp_triplet) != 0:
-                k += 1
+        for i in range(n):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
 
-        for i in range(len(nums)):
+            l, r = i+1, n-1
+            while l < r:
+                total = nums[i] + nums[l] + nums[r]
+                if total < 0:
+                    l += 1
+                elif total > 0:
+                    r -= 1
+                else:
+                    triplets.append([nums[i], nums[l], nums[r]])
+                    while l < r and nums[l] == nums[l+1]:
+                        l += 1
+                    while l < r and nums[r] == nums[r-1]:
+                        r -= 1
+                    l += 1
+                    r -= 1
 
-            
-
+        return triplets   
 
 
 def main():
