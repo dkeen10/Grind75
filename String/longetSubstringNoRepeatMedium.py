@@ -33,14 +33,20 @@ class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         longest_substring = 0
         slow_pointer= 0
-        fast_pointer= 0
+        used_characters = set()
 
-        while slow_pointer < len(s) - 1 and len(s) - slow_pointer > longest_substring:
-            used_characters = set()
-            if s[slow_pointer]
-            used_characters.add(s[slow_pointer])
 
-            slow_pointer += 1
+        for i in range(len(s)):
+            if s[i] not in used_characters:
+                used_characters.add(s[i])
+                longest_substring = max(longest_substring, i - slow_pointer + 1)
+            else:
+                while s[i] in used_characters:
+                    used_characters.remove(s[slow_pointer])
+                    slow_pointer += 1
+                used_characters.add(s[i])
+        return longest_substring
+
 
 def main():
     s = "abcabcbb"
