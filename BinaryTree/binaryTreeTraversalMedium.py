@@ -32,7 +32,26 @@ class TreeNode:
 
 class Solution:
     def levelOrder(self, root: [TreeNode]) -> list[list[int]]:
+        if not root:
+            return []
         
+        queue = [root]
+        res = []
+        
+        while queue:
+            level = []
+            next_queue = []
+            
+            for node in queue:
+                level.append(node.val)
+                if node.left:
+                    next_queue.append(node.left)
+                if node.right:
+                    next_queue.append(node.right)
+                    
+            res.append(level)
+            queue = next_queue    
+        return res
 
 
 def main():
@@ -40,7 +59,7 @@ def main():
     sol = Solution()
     print(sol.levelOrder(root))
 
-    
+
 
 
 if __name__ == "__main__":
