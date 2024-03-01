@@ -60,28 +60,54 @@ class Node:
 
 
 class Solution:
-    def DFS(self, node, ump):
+    
+    def DFS(self, node, cloned_nodes):
         neighbour = []
         clone = Node(node.val)
-        ump[node] = clone
+        cloned_nodes[node] = clone
         for it in node.neighbors:
-            if it not in ump:
-                neighbour.append(self.dfs(it, ump))
+            if it not in cloned_nodes:
+                neighbour.append(self.dfs(it, cloned_nodes))
             else:
-                neighbour.append(ump[it])
+                neighbour.append(cloned_nodes[it])
         clone.neighbors = neighbour
         return clone
 
 
     def cloneGraph_DFS(self, node: Optional['Node']) -> Optional['Node']:
         if not node:
-            return node
-        ump = {}
+            return None
+        cloned_nodes = {}
         if not node.neighbors:
             clone = Node(node.val)
             return clone
-        return self.dfs(node, ump)
+        return self.dfs(node, cloned_nodes)
     
+
+    # def __init__(self):
+    #     # Initialize an empty unordered map to keep track of nodes that have already been cloned.
+    #     self.cloningGraph = {}
+
+
+    def cloneGraph_DFS_v2(self, node: Optional['Node']) -> Optional['Node']:
+        # Check if the input node is null. If it is, return null.
+        if not node:
+            return None
+        
+        # Check if the input node already exists in the map. If it does, return its corresponding clone.
+        if node in self.cloningGraph:
+            return self.cloningGraph[node]
+        
+        # If the node is new, create a new clone with the same value as the input node and add it to the map.
+        clone = Node(node.val, [])
+        self.cloningGraph[node] = clone
+
+        # Iterate through each of the input node's neighbors and recursively clone them, adding them to the clone's list of neighbors.
+        for neighbor in node.neighbors:
+            clone.neighbors.append(self.cloneGraph_DFS_v2(neighbor))
+
+        return clone
+
 
     def cloneGraph_BFS(self, node: Optional['Node']) -> Optional['Node']:
         if not node:
@@ -103,6 +129,28 @@ class Solution:
                 ump[it].neighbors.append(ump[curr])
         return ump[node]
     
+
+    def cloneGraph_V3(self, node: 'Node') -> 'Node':
+        if not node:
+            return node
+        
+        visited = {} # dictionary to store the cloned nodes
+        
+        def dfs(node):
+            if node in visited:
+                return visited[node] # if node already visited, return the corresponding cloned node
+            
+            clone_node = Node(node.val, []) # create a new clone node
+            
+            visited[node] = clone_node # add the original node and its clone to the dictionary
+            
+            for neighbor in node.neighbors: # visit all the neighbors of the node
+                clone_node.neighbors.append(dfs(neighbor)) # if neighbor not visited, create a new clone node and append to the neighbors list of the clone node we are currently visiting. Otherwise, append the corresponding cloned node to the neighbors list.
+            
+            return clone_node
+        
+        return dfs(node) # start DFS from the first node and return its clone
+
 
 def main():
     adjList = [[2,4],[1,3],[2,4],[1,3]]
