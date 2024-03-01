@@ -95,6 +95,7 @@ class Solution:
 
         return stack.pop()
 
+
 def main():
     tokens = ["2","1","+","3","*"]
     print(Solution().evalRPN(tokens))
