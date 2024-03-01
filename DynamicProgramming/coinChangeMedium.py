@@ -1,4 +1,5 @@
 # https://leetcode.com/problems/coin-change/description/
+# like leetcode #70 stair climber but harder.
 
 
 """
@@ -27,15 +28,33 @@ Input: coins = [1], amount = 0
 Output: 0
 """
 
+# Greedy Approach of starting at largest coin and working backwards dowesnt always work.
+# Brute Force Approach of finding all combinations works too, but is slow.
+# dynamic approach stores the lowest amount of coins needed to make each n amount.
+# https://www.youtube.com/watch?v=SIHLJdF4F8A&t=15s
+
 
 class Solution:
     def coinChange(self, coins: list[int], amount: int) -> int:
-        
+        """
+        O(n*m) time complexity.
+        """
+        # initialize the dynamic array with 0s and infinities
+        dynamic_array = [0] + ([float('inf')] * amount)
 
+        for i in range(1, amount + 1):
+            for coin in coins:
+                if coin <= i:
+                    # if the coin is less than or equal to the amount, then we can use it to make change
+                    dynamic_array[i] = min(dynamic_array[i], dynamic_array[i - coin] + 1)
+        if dynamic_array[amount] == float('inf'):
+            return -1
+        return dynamic_array[-1]
+    
 
 def main():
-    coins = [1,2,5]
-    amount = 11
+    coins = [186,419,83,408]
+    amount = 6249
     print(Solution().coinChange(coins, amount))
 
     coins = [2]

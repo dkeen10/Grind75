@@ -1,6 +1,5 @@
 # https://leetcode.com/problems/climbing-stairs/description/
 
-
 """
 You are climbing a staircase. It takes n steps to reach the top.
 
@@ -27,7 +26,7 @@ Explanation: There are three ways to climb to the top.
 """
 
 
-class Solution:
+class Solution:   
     def climbStairsMath(self, n: int) -> int:
         solutions = 1
 
@@ -40,7 +39,7 @@ class Solution:
             solutions += product
             
         return solutions
-
+       
 
     def climbStairsTopDownRecursion(self, n: int) -> int:
         temp_solutions = [-1] * (n + 1)
@@ -79,6 +78,35 @@ class Solution:
         temp_solutions[i] = self.solveBottomUp(i + 1, n, temp_solutions) + self.solveBottomUp(i + 2, n, temp_solutions)
 
         return temp_solutions[i]
+
+
+    def climbStairs_Recursive(self, n: int) -> int:
+        if n==1:
+            return 1
+        if n == 2:
+            return 2
+        return self.climbStairs_Recursive(n-1) + self.climbStairs_Recursive(n-2)
+    
+
+    def climbStairs_dynamic(self, n: int) -> int:
+        """
+        Question is actually asking to find nth fibonnaci number.
+
+        Bottom up, O(n) time, constant space.
+        https://www.youtube.com/watch?v=4ikxUxiEB10&t=0s
+        """
+        if n == 1:
+            return 1
+        
+        one_before = 1
+        two_before = 1
+        total = 0
+
+        for i in range(2, n + 1):
+            total = one_before + two_before
+            two_before = one_before
+            one_before = total
+        return total
 
 
 def main():
