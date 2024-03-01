@@ -31,35 +31,28 @@ class TreeNode:
         self.right = right
 
 class Solution:
-    def levelOrder(self, root: [TreeNode]) -> list[list[int]]:
+    def levelOrder(self, root) -> list[list[int]]:
         if not root:
             return []
-        
         queue = [root]
-        res = []
-        
+        result = []
         while queue:
             level = []
-            next_queue = []
-            
-            for node in queue:
+            for i in range(len(queue)):
+                node = queue.pop(0)
                 level.append(node.val)
                 if node.left:
-                    next_queue.append(node.left)
+                    queue.append(node.left)
                 if node.right:
-                    next_queue.append(node.right)
-                    
-            res.append(level)
-            queue = next_queue    
-        return res
-
-
+                    queue.append(node.right)
+            result.append(level)
+        return result     
+        
+      
 def main():
     root = [3,9,20,None,None,15,7]
     sol = Solution()
     print(sol.levelOrder(root))
-
-
 
 
 if __name__ == "__main__":
