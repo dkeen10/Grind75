@@ -24,6 +24,11 @@ Output: [0,0,9,0,0]
 
 class Solution:
     def productExceptSelf(self, nums: list[int]) -> list[int]:
+        """
+        Two passes at the original array, iterating forwards with all numbers to the left of target, and backwards with all numbers to the right.
+
+        O(n) time complexity since 2 loops with no nesting.  (so technically O(2n), but that is still linear)
+        """
         length = len(nums)
         answer = [0]*length
 
@@ -41,7 +46,6 @@ class Solution:
 
         return answer
             
-
 
 def main():
     nums = [1,2,3,4]
